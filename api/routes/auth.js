@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const url = require('url');
+const mongoose = require('mongoose');
+
 
 router.get("/signup", (req, res) => {
   res.render("signuppage", { msg: null });
@@ -10,9 +13,19 @@ router.get("/login", (req, res) => {
   res.render("loginpage", { msg: null });
 });
 
-router.get("/user/:username", (req, res) => {
-  console.log(req.params.username)
-  res.render("userpage");
+router.get("/user", (req, res) => {
+  let queryID = JSON.parse(req.query.a)
+  let data = mongoose.Types.ObjectId(queryID);
+  User.findOne({_id : data},(err, result) =>{
+    if(err) {
+     return res.render('loginpae',{msg : "somthing wrong"})
+    }
+    else {
+     return res.render('userpage',{User : result} )
+    }
+  })
+  
+  
 });
 
 router.post("/signup", (req, res) => {
@@ -61,25 +74,25 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  console.log(req.body)
-  console.log(req.body.usernameinput)
-  console.log(req.body.passwordinput)
+  
 
-  if (req.body.usernameinput.length === 0 || req.body.passwordinput.length === 0) {
+  if (
+    req.body.usernameinput.length === 0 ||
+    req.body.passwordinput.length === 0
+  ) {
     return res.render("loginpage", { msg: "enter username or password" });
   }
   
   User.findOne(
-    { username: req.body.usernameinput , password: req.body.passwordinput },
+    { username: req.body.usernameinput.trim(), password: req.body.passwordinput },
     (err, result) => {
       if (err) {
-        return res.render("loginpage", {
-          msg: "username or password is incoorect"
-        });
+       console.log(err);
       }
       if (result) {
-        let url = "/auth/user/"+`${result.username}`
-        res.redirect(url);
+        res.redirect(url.format({pathname: '/user',query:{
+          a:JSON.stringify(result._id) 
+        }}))
       }
     }
   );

@@ -1,50 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
 </head>
 <body>
 
-    <main role="main" class="flex-shrink-0">
-        <div class="container">
-          <h1 class="mt-5">User Profile</h1>
-          <hr />
-          <% if ( User ) { %>
-          <div class="row">
-            <div class="col-md-2">
-              <img
-                src="https://lh3.googleUsercontent.com/a-/AOh14GjSb0KZnfOv_wP8cT6M7wEoGMlpG1fFbsO1Uszm7lw=s96-c"
-                class="img-fluid"
-                style="width: 100%"
-              />
-            </div>
-            <div class="col-md-10">
-              <h3>
-                <%= User.firstName %> <%= User.lastName %>
-              </h3>
-              
-             
-              
-              <p><a href="/auth/login">Logout</a></p>
-            </div>
-          </div>
-          <% } else { %>
-          <h1>User not found</h1>
-          <% } %>
-        </div>
-      </main>
+<h2 style="text-align:center">User Profile Card</h2>
+
+<div class="card">
   
-      <footer class="footer mt-auto py-3">
-        <div class="container">
-          <span class="text-muted"
-            >The full guide is available at
-            <a href="https://saasbase.dev/">saasbase.dev</a></span
-          >
-        </div>
-      </footer>
-    
+  <h1><%= User.username  %> </h1>
+  <p class="title"><span>Firstname :</span><%= User.firstName  %> </p>
+  <p class="title"><span>Lasttname :</span><%= User.lastName  %> </p>
+  
+  <p><button>Contact</button></p>
+</div>
+
 </body>
 </html>

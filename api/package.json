@@ -2,12 +2,12 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.2",
-    "mongoose": "^6.1.4"
+    "mongoose": "^6.1.4",
+    "url": "^0.11.0"
   },
   "name": "api",
   "version": "1.0.0",
   "main": "app.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
